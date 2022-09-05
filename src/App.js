@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
+import { Buscador } from "./components/Buscador"
+import { Crear } from "./components/Crear"
+import { Header } from "./components/Header"
+import { Listado } from "./components/Listado"
+import { Footer } from "./components/Footer"
+import { Navegacion } from "./components/Navegacion"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [listadoState, setListadoState] = useState([])
+
+    return (
+        <div className="layout">
+            <Header/>  
+
+            <Navegacion/>
+        
+            <section id="content" className="content">            
+                <Listado
+                    listadoState={listadoState}
+                    setListadoState={setListadoState}
+                />
+            </section>
+        
+            <aside className="lateral">
+                <Buscador
+                    listadoState={listadoState}
+                    setListadoState={setListadoState}
+                />
+
+                <Crear
+                    setListadoState={setListadoState}
+                />
+            </aside>
+            
+            <Footer/>
+        </div>
+    )
 }
 
-export default App;
+export default App
